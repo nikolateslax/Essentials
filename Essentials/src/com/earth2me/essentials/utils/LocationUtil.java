@@ -224,7 +224,13 @@ public class LocationUtil {
     }
 
     public static boolean isBlockUnsafeForUser(final IUser user, final World world, final int x, final int y, final int z) {
-        if (user.getBase().isOnline() && world.equals(user.getBase().getWorld()) && (user.getBase().getGameMode() == GameMode.CREATIVE || user.getBase().getGameMode() == GameMode.SPECTATOR || user.isGodModeEnabled()) && user.getBase().getAllowFlight()) {
+		var userIsSpectating = false;
+		try {
+			userIsSpectating = (user.getBase().getGameMode() == GameMode.SPECTATOR);
+		} catch (java.lang.NoSuchFieldError ex) {
+			userIsSpectating = false;
+		}
+        if (user.getBase().isOnline() && world.equals(user.getBase().getWorld()) && (user.getBase().getGameMode() == GameMode.CREATIVE || user.isGodModeEnabled() || userIsSpectating) && user.getBase().getAllowFlight()) {
             return false;
         }
 
