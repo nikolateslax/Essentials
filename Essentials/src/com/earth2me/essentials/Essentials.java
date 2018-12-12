@@ -50,6 +50,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.GameMode;
 import org.bukkit.block.Block;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -871,6 +872,20 @@ public class Essentials extends JavaPlugin implements net.ess3.api.IEssentials {
     public PotionMetaProvider getPotionMetaProvider() {
         return potionMetaProvider;
     }
+	
+    @Override
+	public GameMode getSpectateGamemode() {
+		try {
+			return GameMode.SPECTATOR;
+		} catch (NoSuchFieldError ex) {
+			return GameMode.CREATIVE;
+		}
+	}
+	
+    @Override
+	public boolean isSpectateAvailable() {
+		return (getSpectateGamemode() != GameMode.CREATIVE);
+	}
 
     private static void addDefaultBackPermissionsToWorld(World w) {
         String permName = "essentials.back.into." + w.getName();

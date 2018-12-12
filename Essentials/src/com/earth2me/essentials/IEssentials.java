@@ -8,6 +8,7 @@ import com.earth2me.essentials.perm.PermissionsHandler;
 import com.earth2me.essentials.register.payment.Methods;
 import net.ess3.nms.SpawnerProvider;
 import org.bukkit.World;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -76,6 +77,10 @@ public interface IEssentials extends Plugin {
     int scheduleSyncDelayedTask(Runnable run, long delay);
 
     int scheduleSyncRepeatingTask(Runnable run, long delay, long period);
+	
+	GameMode getSpectateGamemode();
+	
+	boolean isSpectateAvailable();
 
     TNTExplodeListener getTNTListener();
 
